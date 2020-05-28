@@ -8,12 +8,7 @@ import os
 import site
 
 site.addsitedir(os.path.abspath(os.path.dirname(__file__) + '/extlibs'))
-
-# ABP: TORM import gsconfig from here
-# sys.path.insert(0, os.path.abspath(os.path.dirname(__file__) + '/ext-src/gsconfig/src'))
-#import httplib2
-#httplib2.debuglevel = 1
-
+site.addsitedir(os.path.abspath(os.path.dirname(__file__) + '/bridgestyle'))
 
 from geoserverexplorer.qgis.catalog import *
 

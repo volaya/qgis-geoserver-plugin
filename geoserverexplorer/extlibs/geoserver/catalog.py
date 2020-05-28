@@ -966,14 +966,17 @@ class Catalog(object):
         if style is None:
             headers = {
                 "Content-type": "application/xml",
-                "Accept": "application/xml"
+                "Accept": "text/plain"
             }
             xml = "<style><name>{0}</name><filename>{0}.sld</filename></style>".format(name)
             style = Style(self, name, workspace, style_format)
 
             resp = self.http_request(style.create_href, method='post', data=xml, headers=headers)
+            if resp.status_code == 406:
+                headers["Accept"] = "application/xml"
+                resp = self.http_request(style.create_href, method='post', data=xml, headers=headers)
             if resp.status_code not in (200, 201, 202):
-                FailedRequestError('Failed to create style {} : {}, {}'.format(name, resp.status_code, resp.text))
+                raise FailedRequestError('Failed to create style {} : {}, {}'.format(name, resp.status_code, resp.text))
 
         headers = {
             "Content-type": style.content_type,
@@ -986,7 +989,7 @@ class Catalog(object):
 
         resp = self.http_request(body_href, method='put', data=data, headers=headers)
         if resp.status_code not in (200, 201, 202):
-            FailedRequestError('Failed to create style {} : {}, {}'.format(name, resp.status_code, resp.text))
+            raise FailedRequestError('Failed to upload style {} : {}, {}'.format(name, resp.status_code, resp.text))
 
         self._cache.pop(style.href, None)
         self._cache.pop(style.body_href, None)

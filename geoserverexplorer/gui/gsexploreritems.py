@@ -33,7 +33,7 @@ from geoserverexplorer.gui.parametereditor import ParameterEditor
 from .dialogs.sldeditor import SldEditorDialog
 from geoserverexplorer.gui.gwcexploreritems import GwcLayersItem
 from geoserverexplorer.qgis.utils import *
-from geoserverexplorer.qgis.sldadapter import adaptGsToQgs, getGeomTypeFromSld,\
+from geoserverexplorer.qgis.sldadapter import getGeomTypeFromSld,\
     getGsCompatibleSld
 from geoserverexplorer.gui.confirm import *
 from geoserverexplorer.geoserver.util import getLayerFromStyle
@@ -1143,7 +1143,7 @@ class GsStyleItem(GsTreeItem):
         except:
             self._showSldParsingError()
             return
-        sld = adaptGsToQgs(sld)
+        #sld = adaptGsToQgs(sld)
         sldfile = tempFilename("sld")
         with open(sldfile, 'w') as f:
             f.write(sld)
@@ -1178,7 +1178,6 @@ class GsStyleItem(GsTreeItem):
             dlg = SldEditorDialog(self.element, explorer)
             dlg.exec_()
         except:
-            raise
             self._showSldParsingError()
 
     def deleteStyle(self, tree, explorer):

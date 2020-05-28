@@ -5,7 +5,6 @@
 #
 from geoserverexplorer.qgis.utils import isTrackedLayer
 from geoserverexplorer.qgis import uri as uri_utils
-from geoserverexplorer.qgis.sldadapter import adaptGsToQgs
 from qgis.core import *
 from qgis.gui import *
 from qgis.utils import iface
@@ -35,7 +34,6 @@ def layerAdded(qgislayer):
                 if uri == qgislayer.source():
                     try:
                         sld = layer.default_style.sld_body.decode()
-                        sld = adaptGsToQgs(sld)
                         sldfile = tempFilename("sld")
                         with open(sldfile, 'w') as f:
                             f.write(sld)

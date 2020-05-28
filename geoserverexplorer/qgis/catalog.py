@@ -11,7 +11,7 @@ from qgis.PyQt import QtCore
 from geoserverexplorer.geoserver import GeoserverException
 from geoserverexplorer.qgis import layers, exporter, utils
 from geoserver.catalog import ConflictingDataError, UploadError, FailedRequestError
-from geoserverexplorer.qgis.sldadapter import adaptGsToQgs, getGsCompatibleSld, setUnits
+from geoserverexplorer.qgis.sldadapter import getGsCompatibleSld
 from geoserverexplorer.qgis import uri as uri_utils
 from geoserverexplorer.geoserver.auth import AuthCatalog
 from geoserverexplorer.geoserver.basecatalog import BaseCatalog

@@ -1,3 +1,6 @@
 [submodule "docs/themes"]
 	path = docs/themes
 	url = https://github.com/boundlessgeo/sphinx-theme
+[submodule "geoserverexplorer/bridgestyle"]
+	path = geoserverexplorer/bridgestyle
+	url = https://github.com/GeoCat/bridge-style.git
