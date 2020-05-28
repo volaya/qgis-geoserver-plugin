@@ -1,5 +1,5 @@
 [
-    {"name":"ShowDescription",
+    {"name":"ShowDescription (requires restart)",
      "label": "Show description panel",
      "description": "Show description panel",
      "type": "bool",
@@ -14,7 +14,7 @@
      "group": "General"
     },
     {"name":"ShowToolbar",
-     "label": "Show toolbar",
+     "label": "Show toolbar (requires restart)",
      "description": "Show toolbar",
      "type": "bool",
      "default": false,
@@ -61,19 +61,5 @@
      "type": "number",
      "default": 180,
      "group": "General"
-    },
-    {"name":"SldUomManaging",
-    "label": "QGIS manage SLD uom correctly",
-    "description": "QGIS manage SLD uom correctly",
-    "type": "bool",
-    "default": true,
-    "group": "General"
-    },
-    {"name":"SldScaleFactor",
-    "label": "Size scale factor. !Unused if uom is managed!",
-    "description": "Size scale factor. !Unused if uom is managed!",
-    "type": "number",
-    "default": 4,
-    "group": "General"
     }
 ]
