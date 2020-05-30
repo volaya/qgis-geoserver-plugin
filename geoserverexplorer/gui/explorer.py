@@ -38,7 +38,7 @@ class GeoServerExplorer(QDockWidget):
         self.splitter.setOrientation(Qt.Vertical)
         self.subwidget = QWidget()
         self.explorerTree = self.tree = ExplorerTreeWidget(self)
-        showToolbar = pluginSetting("ShowToolbar")
+        showToolbar = pluginSetting("ShowToolbar", typ=bool)
         self.toolbar = QToolBar()
         self.toolbar.setToolButtonStyle(Qt.ToolButtonIconOnly)
         self.toolbar.setVisible(showToolbar)
@@ -52,7 +52,7 @@ class GeoServerExplorer(QDockWidget):
         self.description.setLayout(self.descriptionLayout)
         self.splitter.addWidget(self.description)
         self.setDescriptionWidget()
-        showDescription = pluginSetting("ShowDescription")
+        showDescription = pluginSetting("ShowDescription", typ=bool)
         self.description.setVisible(showDescription)
         self.progress = None
         self.layout = QVBoxLayout()
