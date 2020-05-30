@@ -394,10 +394,10 @@ class GsGroupsItem(GsTreeItem):
         dlg.exec_()
         group = dlg.group
         if group is not None:
-            explorer.run(self.parentCatalog().save,
-                     "Create group '" + group.name + "'",
+            explorer.run(publishGroup,
+                     "Create group '" + group["layerGroup"]["name"] + "'",
                      [self],
-                     group)
+                     self.parentCatalog(), group)
 
 
 class GsWorkspacesItem(GsTreeItem):
@@ -847,15 +847,18 @@ class GsLayerItem(GsTreeItem):
             groupsItem = None
         layers = [item.element for item in selected]
         styles = [layer.default_style.name for layer in layers]
-        layerNames = [layer.name for layer in layers]
+        layerEntries = [{"@type":"layer", "name": layer.name} for layer in layers]
         #TODO calculate bounds
-        bbox = None
-        group =  UnsavedLayerGroup(catalog, name, layerNames, styles, bbox, "SINGLE", "", name)
 
-        explorer.run(self.parentCatalog().save,
+        group = {"layerGroup":{"name": name,
+                            "title": name,
+                            "mode":"NAMED",
+                            "publishables": {"published":layerEntries},
+                            "styles":{"style": styles}}}
+        explorer.run(publishGroup,
                      "Create group '" + name + "'",
                      [groupsItem],
-                     group)
+                     self.parentCatalog(), group)
 
     def deleteLayer(self, tree, explorer):
         self.deleteElements([self], tree, explorer)
@@ -995,6 +998,7 @@ class GsGroupItem(GsTreeItem):
     def populate(self):
         layers = self.element.catalog.get_layers()
         layersDict = dict([(layer.name, layer) for layer in layers])
+        self.element.refresh()
         groupLayers = self.element.layers
         if groupLayers is None:
             return
@@ -1055,9 +1059,10 @@ class GsGroupItem(GsTreeItem):
         dlg.exec_()
         group = dlg.group
         if group is not None:
-            explorer.run(cat.save, "Edit layer group '" + self.element.name + "'",
-                              [self],
-                              group)
+            explorer.run(publishGroup,
+                     "Create group '" + group["layerGroup"]["name"] + "'",
+                     [self],
+                     self.parentCatalog(), group)
 
 
 class GsStyleItem(GsTreeItem):

@@ -136,19 +136,21 @@ class LayerGroupDialog(QDialog):
         for i in range(len(self.layernames)):
             widget = self.table.cellWidget(i, 0)
             if widget.isChecked():
-                layers.append(widget.text())
+                layers.append({"@type":"layer", "name":widget.text()})
                 styleWidget = self.table.cellWidget(i, 1)
                 styles.append(styleWidget.currentText())
         if len(self.layernames) == 0:
             return
             #TODO show alert
-        if self.previousgroup is not None:
-            self.group = self.previousgroup
-            self.group.dirty.update(layers = layers, styles = styles)
-        else:
-            #TODO compute bounds
-            bbox = None
-            self.group =  UnsavedLayerGroup(self.catalog, self.name, layers, styles, bbox, "SINGLE", "", self.name)
+
+        self.group = {}
+        #if self.previousgroup:
+        #    self.group.update(self.previousgroup)
+        self.group.update({"layerGroup":{"name": self.name,
+                            "title": self.name,
+                            "mode":"NAMED",
+                            "publishables": {"published":layers},
+                            "styles":{"style": styles}}})
         self.close()
 
     def cancelPressed(self):

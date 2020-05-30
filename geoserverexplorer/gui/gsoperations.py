@@ -4,6 +4,7 @@
 # This code is licensed under the GPL 2.0 license.
 #
 import traceback
+import json
 from qgis.PyQt import QtCore
 from qgis.core import *
 from geoserverexplorer.qgis import layers as qgislayers
@@ -198,3 +199,20 @@ def publishLayers(tree, explorer, catalog):
     _publishLayers(catalog, layers, layersUploaded)
 
 
+#gsconfig seems unreliable for this, se we handle groups in different way
+def publishGroup(catalog, groupdef):
+    layers = []
+    for layer, style in layers:
+        layers.append({"@type": "layer", "name": "%s:%s" % (self._workspace, layer)})
+    
+    headers = {"Content-Type": "application/json"}
+    groupurl = "%s/layergroups/%s" % (catalog.service_url, groupdef["layerGroup"]["name"])
+    groupsurl = "%s/layergroups" % (catalog.service_url)
+    try:
+        ret = catalog.http_request(groupurl, method="delete", headers=headers)
+    except:
+        pass
+    
+    group = json.dumps(groupdef)
+
+    ret = catalog.http_request(groupsurl, group, "post", headers)        
