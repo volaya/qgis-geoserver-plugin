@@ -20,7 +20,7 @@ General
      - Show description panel
    * - Ask confirmation before deleting
      - Ask confirmation before deleting
-   * - Show toolbar
+   * - Show toolbar (requires restart)
      - Show toolbar
    * - Keep a list of previous catalog connections
      - Keep a list of previous catalog connections
@@ -34,7 +34,3 @@ General
      - Overwrite layers when uploading group
    * - AuthCatalog XML cache time in seconds
      - AuthCatalog XML cache time in seconds
-   * - QGIS manage SLD uom correctly
-     - QGIS manage SLD uom correctly
-   * - Size scale factor. !Unused if uom is managed!
-     - Size scale factor. !Unused if uom is managed!
