@@ -25,7 +25,7 @@ def publishLayer(catalog, layer, workspace=None, overwrite=False):
 
 
 def confirmDelete():
-    askConfirmation = pluginSetting("ConfirmDelete")
+    askConfirmation = pluginSetting("ConfirmDelete", "geoserverexplorer")
     if not askConfirmation:
         return True
     msg = "You confirm that you want to delete the selected elements?"

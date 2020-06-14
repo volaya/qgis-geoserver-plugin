@@ -31,7 +31,7 @@ def createGeoServerCatalog(service_url = "http://localhost:8080/geoserver/rest",
     if authid is None:
         catalog = BaseCatalog(service_url, username, password)
     else:
-        cache_time = pluginSetting("AuthCatalogXMLCacheTime")
+        cache_time = pluginSetting("AuthCatalogXMLCacheTime", "geoserverexplorer")
         catalog = AuthCatalog(service_url, authid, cache_time)
 
     return CatalogWrapper(catalog)

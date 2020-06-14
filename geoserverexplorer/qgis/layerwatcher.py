@@ -54,7 +54,7 @@ def _resetCurrentMessageBarLayer():
 
 def updatePublishedStyle(layer):
     global _currentMessageBarLayer
-    track = pluginSetting("TrackLayers")
+    track = pluginSetting("TrackLayers", "geoserverexplorer")
     if track and isTrackedLayer(layer):
         if iface.messageBar().currentItem() is None:
             _resetCurrentMessageBarLayer()

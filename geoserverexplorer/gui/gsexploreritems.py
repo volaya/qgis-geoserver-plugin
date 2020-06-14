@@ -128,8 +128,8 @@ class GsTreeItem(TreeItem):
             toUpdate = [item for item in toUpdate if item not in toDelete]
         elif not confirmDelete():
             return
-        deleteStyle = pluginSetting("DeleteStyle")
-        recurse = pluginSetting("Recurse")
+        deleteStyle = pluginSetting("DeleteStyle", "geoserverexplorer")
+        recurse = pluginSetting("Recurse", "geoserverexplorer")
 
         elements[0:0] = dependent
         if recurse:
@@ -274,7 +274,7 @@ class GsCatalogsItem(GsTreeItem):
         icon = QIcon(os.path.dirname(__file__) + "/../images/geoserver.png")
         GsTreeItem.__init__(self, None, icon, "Catalogs")
         settings = QSettings()
-        saveCatalogs = pluginSetting("SaveCatalogs")
+        saveCatalogs = pluginSetting("SaveCatalogs", "geoserverexplorer")
         if saveCatalogs:
             settings.beginGroup("/GeoServer/Catalogs")
             for name in settings.childGroups():
@@ -297,7 +297,7 @@ class GsCatalogsItem(GsTreeItem):
             try:
                 QApplication.setOverrideCursor(QCursor(Qt.WaitCursor))
                 if dlg.authid:
-                    cache_time = pluginSetting("AuthCatalogXMLCacheTime")
+                    cache_time = pluginSetting("AuthCatalogXMLCacheTime", "geoserverexplorer")
                     cat = AuthCatalog(dlg.url, dlg.authid, cache_time)
                     self.catalog = cat
                 else:
@@ -513,7 +513,7 @@ class GsCatalogItem(GsTreeItem):
                 authtype = QgsApplication.authManager().configAuthMethodKey(authid)
                 if not authtype or authtype == '':
                     raise Exception("Cannot restore catalog. Invalid or missing auth information")
-                cache_time =  pluginSetting("AuthCatalogXMLCacheTime")
+                cache_time =  pluginSetting("AuthCatalogXMLCacheTime", "geoserverexplorer")
                 self.catalog = AuthCatalog(url, authid, cache_time)
 
             else:
@@ -613,7 +613,7 @@ class GsCatalogItem(GsTreeItem):
         dlg.exec_()
         if dlg.ok:
             if dlg.authid:             
-                cache_time = pluginSetting("AuthCatalogXMLCacheTime")
+                cache_time = pluginSetting("AuthCatalogXMLCacheTime", "geoserverexplorer")
                 self.catalog = AuthCatalog(dlg.url, dlg.authid, cache_time)          
             else:
                 self.catalog = BaseCatalog(dlg.url, dlg.username, dlg.password)

@@ -51,7 +51,7 @@ class GeoServerExplorerPlugin(object):
 
         self.explorer = GeoServerExplorer()
         self.iface.addDockWidget(Qt.RightDockWidgetArea, self.explorer)
-        if not pluginSetting("ExplorerVisible"):
+        if not pluginSetting("ExplorerVisible", "geoserverexplorer"):
             self.explorer.hide()
         self.explorer.visibilityChanged.connect(self._explorerVisibilityChanged)
 
