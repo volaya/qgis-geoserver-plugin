@@ -14,8 +14,8 @@ except ImportError:
 class Style(ResourceInfo):
     supported_formats = ["sld10", "sld11", "zip"]
     content_types = {
-        "sld10": "application/vnd.ogc.sld+xml",
-        "sld11": "application/vnd.ogc.se+xml",
+        "sld10": "application/vnd.ogc.sld+xml; charset=utf-8",
+        "sld11": "application/vnd.ogc.se+xml; charset=utf-8",
         "zip": "application/zip"
     }
 

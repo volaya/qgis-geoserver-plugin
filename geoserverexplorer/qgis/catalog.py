@@ -137,7 +137,7 @@ class CatalogWrapper(object):
             name = name if name is not None else layer.name()
             name = name.replace(" ", "_")
             self.uploadIcons(icons)
-            self.catalog.create_style(name, sld, overwrite)
+            self.catalog.create_style(name, sld.encode('utf-8'), overwrite)
         return sld
 
 
@@ -318,7 +318,6 @@ class CatalogWrapper(object):
             except Exception as e:
                 ok = False
             QgsProject.instance().addMapLayers([qgslayer])
-            setUnits(qgslayer)
             addTrackedLayer(qgslayer, self.catalog.service_url)
             if not ok:
                 raise Exception ("Layer was added, but style could not be set (maybe GeoServer layer is missing default style)")
