@@ -38,7 +38,7 @@ class SldEditorDialog(QDialog):
         buttonBox.rejected.connect(self.cancelPressed)
 
     def okPressed(self):
-        self.explorer.run(self.style.update_body, "Update SLD body", [], self.editor.text())
+        self.explorer.run(self.style.update_body, "Update SLD body", [], self.editor.text().encode('utf-8'))
         self.close()
 
     def cancelPressed(self):
